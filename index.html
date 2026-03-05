@@ -222,33 +222,33 @@ tbody tr:hover td{background:#f8faff;}
           </select>
         </div>
 
-        <!-- City -->
+        <!-- Designer (used as Category) -->
         <div>
           <div class="filter-label-row">
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-            City
+            Designer
           </div>
           <select class="filter-select" id="sel-city" onchange="onFilterChange('city',this)">
-            <option value="All">All Cities</option>
+            <option value="All">All Designers</option>
           </select>
         </div>
 
-        <!-- TSM Status -->
+        <!-- TSM Verification Status -->
         <div>
           <div class="filter-label-row">
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            TSM Status
+            TSM Verif. Status
           </div>
           <select class="filter-select" id="sel-status" onchange="onFilterChange('status',this)">
             <option value="All">All Statuses</option>
           </select>
         </div>
 
-        <!-- Timeline -->
+        <!-- TSM Projects (Yes/No) -->
         <div>
           <div class="filter-label-row">
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            Timeline Status
+            TSM Projects
           </div>
           <select class="filter-select" id="sel-timeline" onchange="onFilterChange('timeline',this)">
             <option value="All">All</option>
@@ -289,34 +289,34 @@ tbody tr:hover td{background:#f8faff;}
     <!-- KPI STRIP -->
     <div class="kpi-strip">
       <div class="kpi white">
-        <div class="kpi-lbl">TSM Approved</div>
+        <div class="kpi-lbl">TSM Projects</div>
         <div class="kpi-val" id="kApproved">—</div>
-        <div class="kpi-sub" id="kApprovedS">projects</div>
+        <div class="kpi-sub" id="kApprovedS">BL column = Yes</div>
       </div>
       <div class="kpi kblue">
-        <div class="kpi-lbl">Completed</div>
+        <div class="kpi-lbl">TSM Complete</div>
         <div class="kpi-val" id="kComplete">—</div>
-        <div class="kpi-sub" id="kCompleteS">of total</div>
+        <div class="kpi-sub" id="kCompleteS">AQ = Approved</div>
       </div>
       <div class="kpi kcyan">
         <div class="kpi-lbl">Pending</div>
         <div class="kpi-val" id="kPending">—</div>
-        <div class="kpi-sub" id="kPendingS">of total</div>
+        <div class="kpi-sub" id="kPendingS">Distinct leads − Approved</div>
       </div>
       <div class="kpi kgreen">
-        <div class="kpi-lbl">On Time</div>
+        <div class="kpi-lbl">Distinct Leads</div>
         <div class="kpi-val" id="kOnTime">—</div>
-        <div class="kpi-sub" id="kOnTimeS">of total</div>
+        <div class="kpi-sub" id="kOnTimeS">Unique lead IDs</div>
       </div>
       <div class="kpi kpink">
-        <div class="kpi-lbl">Delayed</div>
+        <div class="kpi-lbl">In Progress</div>
         <div class="kpi-val" id="kDelay">—</div>
-        <div class="kpi-sub" id="kDelayS">need attention</div>
+        <div class="kpi-sub" id="kDelayS">Verification ongoing</div>
       </div>
       <div class="kpi kpurple">
-        <div class="kpi-lbl">Avg TAT</div>
+        <div class="kpi-lbl">Total Rows</div>
         <div class="kpi-val" id="kTAT">—</div>
-        <div class="kpi-sub">avg days</div>
+        <div class="kpi-sub" id="kTATT">All filtered entries</div>
       </div>
     </div>
 
@@ -349,9 +349,13 @@ tbody tr:hover td{background:#f8faff;}
 </div>
 
 <script>
-const SHEET_ID='1Vt53xCPquUQUwhujOIKasDRHAKxNXvjrx6FYiRf2KCE', GID='1888739391';
+const SHEET_ID='1Rl3UagUWe9W7atfmQyU383mZC4Ly7C0gk7mv_Mc0JFw', GID='0';
 const CSV_URL=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
 const PG=15;
+// Column indices (0-based): A=0, BL=63, AQ=42
+const COL_LEAD_ID = 0;       // Column A - Lead ID
+const COL_TSM_PROJECTS = 63; // Column BL - TSM projects (Yes/No)
+const COL_TSM_STATUS = 42;   // Column AQ - TSM Verification Status (Approved)
 
 let allRows=[],headers=[],filtered=[];
 let F={date:'All time',city:'All',status:'All',timeline:'All',extra1:'All',extra2:'All'};
@@ -391,9 +395,10 @@ function pl(line){
 const ci=kw=>headers.findIndex(h=>h.toLowerCase().includes(kw.toLowerCase()));
 
 function populateSelects(){
-  fillSelect('sel-city', ci('city'), 'All Cities');
-  fillSelect('sel-status', ci('status'), 'All Statuses');
-  fillSelect('sel-timeline', ci('time'), 'All');
+  // Col 42 = TSM Verification Status, Col 63 = TSM projects (Yes/No), Col 3 = 3D Designer
+  fillSelect('sel-status',   42, 'All Statuses');   // TSM Verification Status
+  fillSelect('sel-timeline', 63, 'All');            // TSM Projects (Yes/No)
+  fillSelect('sel-city',      3, 'All Designers');  // 3D Designer as "category"
 }
 function fillSelect(selId, colI, allLabel){
   const sel=document.getElementById(selId);
@@ -411,11 +416,11 @@ function onFilterChange(key, sel){
 
 function applyFilters(){
   const q=document.getElementById('searchInput').value.toLowerCase();
-  const cI=ci('city'), sI=ci('status'), tI=ci('time');
+  // col 3=Designer, col 42=TSM Verif Status, col 63=TSM Projects
   filtered=allRows.filter(r=>{
-    const mc=F.city==='All'||cI===-1||(r[cI]||'').trim()===F.city;
-    const ms=F.status==='All'||sI===-1||(r[sI]||'').trim()===F.status;
-    const mt=F.timeline==='All'||tI===-1||(r[tI]||'').trim()===F.timeline;
+    const mc=F.city==='All'||(r[3]||'').trim()===F.city;
+    const ms=F.status==='All'||(r[42]||'').trim()===F.status;
+    const mt=F.timeline==='All'||(r[63]||'').trim()===F.timeline;
     const mq=!q||r.some(c=>c.toLowerCase().includes(q));
     return mc&&ms&&mt&&mq;
   });
@@ -437,28 +442,43 @@ function renderTags(){
 function resetSel(id){ const s=document.getElementById(id); s.selectedIndex=0; s.classList.remove('active'); }
 
 function updateKPIs(){
-  const sI=ci('status'), aoI=ci('approved'), tI=ci('time'), tatI=ci('tat')!==-1?ci('tat'):ci('days');
-  const tot=filtered.length;
-  const approved=aoI!==-1?filtered.filter(r=>(r[aoI]||'').trim()).length:tot;
-  const complete=sI!==-1?filtered.filter(r=>/complet/i.test(r[sI]||'')).length:0;
-  const pending=sI!==-1?filtered.filter(r=>/pend/i.test(r[sI]||'')).length:0;
-  const ontime=tI!==-1?filtered.filter(r=>/on.?time/i.test(r[tI]||'')).length:0;
-  const delay=tI!==-1?filtered.filter(r=>{const v=(r[tI]||'').toLowerCase();return v.includes('day')||(/delay/i.test(v)&&!/no.?delay/i.test(v));}).length:0;
-  let avgTat='—';
-  if(tatI!==-1){const vals=filtered.map(r=>parseFloat(r[tatI]||0)).filter(v=>v>0);if(vals.length)avgTat=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);}
-  const pct=(n)=>tot>0?Math.round(n/tot*100)+'%':'—';
+  // KPI 1: Count of "Yes" in column BL (TSM projects) — from ALL rows, not filtered
+  const tsmYesCount = allRows.filter(r=>(r[COL_TSM_PROJECTS]||'').trim().toLowerCase()==='yes').length;
 
-  document.getElementById('kApproved').textContent=approved;
-  document.getElementById('kComplete').textContent=complete;
-  document.getElementById('kPending').textContent=pending;
-  document.getElementById('kOnTime').textContent=ontime;
-  document.getElementById('kDelay').textContent=delay;
-  document.getElementById('kTAT').textContent=avgTat;
-  document.getElementById('kApprovedS').textContent=`${tot} filtered`;
-  document.getElementById('kCompleteS').textContent=pct(complete)+' of total';
-  document.getElementById('kPendingS').textContent=pct(pending)+' of total';
-  document.getElementById('kOnTimeS').textContent=pct(ontime)+' of total';
-  document.getElementById('kDelayS').textContent=pct(delay)+' of total';
+  // KPI 2: Count of "Approved" in column AQ (TSM Verification Status) among filtered rows
+  const approvedCount = filtered.filter(r=>(r[COL_TSM_STATUS]||'').trim().toLowerCase()==='approved').length;
+
+  // KPI 3: Distinct Lead IDs in filtered rows − Approved count = Pending
+  const distinctLeads = new Set(filtered.map(r=>(r[COL_LEAD_ID]||'').trim()).filter(Boolean)).size;
+  const pendingCount = Math.max(0, distinctLeads - approvedCount);
+
+  // KPI 4: Total filtered rows
+  const tot = filtered.length;
+
+  // KPI 5: Distinct Lead IDs total
+  const totalDistinct = new Set(filtered.map(r=>(r[COL_LEAD_ID]||'').trim()).filter(Boolean)).size;
+
+  // KPI 6: Rows where TSM Verification Status is NOT Approved and not empty
+  const inProgress = filtered.filter(r=>{
+    const v=(r[COL_TSM_STATUS]||'').trim().toLowerCase();
+    return v && v!=='approved';
+  }).length;
+
+  const pct=(n,d)=>d>0?Math.round(n/d*100)+'%':'—';
+
+  document.getElementById('kApproved').textContent = tsmYesCount;
+  document.getElementById('kComplete').textContent  = approvedCount;
+  document.getElementById('kPending').textContent   = pendingCount;
+  document.getElementById('kOnTime').textContent    = totalDistinct;
+  document.getElementById('kDelay').textContent     = inProgress;
+  document.getElementById('kTAT').textContent       = tot;
+
+  document.getElementById('kApprovedS').textContent = 'TSM projects (BL = Yes)';
+  document.getElementById('kCompleteS').textContent = 'AQ = Approved · '+pct(approvedCount,tot);
+  document.getElementById('kPendingS').textContent  = 'Distinct leads − approved';
+  document.getElementById('kOnTimeS').textContent   = 'Unique lead IDs';
+  document.getElementById('kDelayS').textContent    = 'Verification in progress';
+  document.getElementById('kTATT') && (document.getElementById('kTATT').textContent='Total filtered rows');
 }
 
 function renderTable(){
@@ -466,29 +486,21 @@ function renderTable(){
   if(pg>pages) pg=pages;
   const s=(pg-1)*PG, e=Math.min(s+PG,tot), rows=filtered.slice(s,e);
 
-  const pjI=ci('project')!==-1?ci('project'):0;
-  const cpI=ci('capacity')!==-1?ci('capacity'):ci('cap');
-  const cyI=ci('city');
-  const rvI=ci('revision')!==-1?ci('revision'):ci('rev');
-  const aoI=ci('approved on')!==-1?ci('approved on'):ci('approved');
-  const ttI=ci('tat')!==-1?ci('tat'):ci('days');
-  const exI=ci('expected'); const cmI=ci('completed');
-  const stI=ci('status'); const tlI=ci('time');
-
-  const cols=[
-    {l:'Project Name',i:pjI},{l:'Capacity',i:cpI},{l:'City',i:cyI},
-    {l:'TSM Revision',i:rvI},{l:'Approved On',i:aoI},{l:'TAT (Days)',i:ttI},
-    {l:'Expected Date',i:exI},{l:'Completed Date',i:cmI},
-    {l:'TSM Status',i:stI},{l:'Timeline',i:tlI}
-  ].filter(c=>c.i!==-1&&c.i!==undefined);
-  const dc=cols.length>=3?cols:headers.slice(0,10).map((h,i)=>({l:h,i}));
+  // Use exact known column indices from the sheet
+  const dc=[
+    {l:'Lead ID',           i:0},   // A
+    {l:'Project Name',      i:1},   // B
+    {l:'Designer',          i:3},   // D - 3D Designer
+    {l:'3D Approved On',    i:9},   // J
+    {l:'QHSE Status',       i:23},  // X
+    {l:'TSM Layout Creator',i:27},  // AB
+    {l:'TSM Approved On',   i:33},  // AH
+    {l:'TSM Verif. Status', i:42},  // AQ
+    {l:'Finance Approval',  i:48},  // AW
+    {l:'TSM Projects',      i:63},  // BL
+  ].filter(c => c.i < headers.length);
 
   document.getElementById('rowCount').textContent=`${tot} projects`;
-
-  const tatI2=ci('tat')!==-1?ci('tat'):ci('days');
-  const tatValsAll=filtered.map(r=>tatI2!==-1?parseFloat(r[tatI2]||0):0);
-  const maxTat=Math.max(...tatValsAll)||1;
-  const totTat=tatI2!==-1?filtered.reduce((a,r)=>a+(parseFloat(r[tatI2]||0)),0):null;
 
   let html=`<table><thead><tr>`;
   dc.forEach(c=>{const a=sc===c.i?(sd===1?' ↑':' ↓'):'';html+=`<th onclick="sortBy(${c.i})">${esc(c.l)}${a}</th>`;});
@@ -500,31 +512,18 @@ function renderTable(){
     rows.forEach(row=>{
       html+='<tr>';
       dc.forEach(c=>{
-        const val=(row[c.i]||'').trim(), l=c.l.toLowerCase();
+        const val=(row[c.i]||'').trim();
+        const l=c.l.toLowerCase();
         let cell;
-        if(l.includes('status')) cell=bSt(val);
-        else if(l.includes('timeline')) cell=bTl(val);
-        else if(l.includes('rev')) cell=val?`<span class="rev-chip">${esc(val)}</span>`:'<span style="color:#cbd5e1">—</span>';
-        else if(l.includes('project')||l.includes('name')) cell=`<strong style="font-weight:600">${esc(val)}</strong>`;
-        else if(l.includes('tat')||l.includes('days')){
-          const n=parseFloat(val)||0;
-          const heat=n>=maxTat*0.75?'heat-high':n>=maxTat*0.4?'heat-mid':'heat-low';
-          cell=val?`<span class="${heat}">${esc(val)}</span>`:'<span style="color:#cbd5e1">—</span>';
-        }
+        if(l.includes('status')||l.includes('verif')) cell=bSt(val);
+        else if(l.includes('tsm projects')||l.includes('finance')) cell=bYesNo(val);
+        else if(l.includes('project name')) cell=`<strong style="font-weight:600">${esc(val)}</strong>`;
+        else if(l.includes('lead id')) cell=`<span style="font-size:.7rem;color:var(--muted);font-family:monospace">${esc(val)}</span>`;
         else cell=esc(val)||`<span style="color:#cbd5e1">—</span>`;
         html+=`<td>${cell}</td>`;
       });
       html+='</tr>';
     });
-    // Grand total
-    html+='<tr class="grand-row">';
-    dc.forEach(c=>{
-      const l=c.l.toLowerCase();
-      if(l.includes('project')||l.includes('name')) html+=`<td>Grand Total</td>`;
-      else if((l.includes('tat')||l.includes('days'))&&tatI2!==-1) html+=`<td><span style="font-weight:700">${totTat!==null?totTat.toFixed(0):'—'}</span></td>`;
-      else html+=`<td></td>`;
-    });
-    html+='</tr>';
   }
   html+='</tbody></table>';
   document.getElementById('tableArea').innerHTML=html;
@@ -541,8 +540,15 @@ function renderTable(){
   }
 }
 function pgNav(d){const tot=filtered.length,pages=Math.max(1,Math.ceil(tot/PG));pg=Math.min(Math.max(1,pg+d),pages);renderTable();}
-function sortBy(i){if(sc===i)sd*=-1;else{sc=i;sd=1;}renderTable();}
-function bSt(v){if(!v)return '<span style="color:#cbd5e1">—</span>';const k=v.toLowerCase();let c='b-pending';if(/complet/i.test(k))c='b-completed';else if(/delay/i.test(k))c='b-delayed';else if(/progress/i.test(k))c='b-progress';return`<span class="badge ${c}">${esc(v)}</span>`;}
+function bYesNo(v){
+  if(!v) return '<span style="color:#cbd5e1">—</span>';
+  if(/yes/i.test(v)) return `<span class="badge b-completed">${esc(v)}</span>`;
+  if(/no/i.test(v))  return `<span class="badge b-delayed">${esc(v)}</span>`;
+  if(/approved/i.test(v)) return `<span class="badge b-completed">${esc(v)}</span>`;
+  if(/rejected/i.test(v)) return `<span class="badge b-delayed">${esc(v)}</span>`;
+  return `<span class="badge b-progress">${esc(v)}</span>`;
+}
+function bSt(v){if(!v)return '<span style="color:#cbd5e1">—</span>';const k=v.toLowerCase();let c='b-pending';if(/approv/i.test(k))c='b-completed';else if(/reject/i.test(k))c='b-delayed';else if(/progress/i.test(k))c='b-progress';return`<span class="badge ${c}">${esc(v)}</span>`;}
 function bTl(v){if(!v)return '<span style="color:#cbd5e1">—</span>';if(/on.?time/i.test(v))return`<span class="tl-ontime">On Time</span>`;if(/no.?delay/i.test(v))return`<span class="tl-nodelay">No Delay</span>`;if(/\d+\s*day/i.test(v))return`<span class="tl-days">${esc(v)}</span>`;return`<span style="color:var(--muted)">${esc(v)}</span>`;}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
