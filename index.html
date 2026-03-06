@@ -201,7 +201,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);font-
     <option value="All">🏙 All Cities</option>
   </select>
   <select class="fsel" id="fBucket" onchange="onF('bucket',this)">
-    <option value="All">🪣 All Buckets</option>
+    <option value="All"> All Buckets</option>
   </select>
   <button class="clr-btn" onclick="clearAll()">✕ Clear</button>
   <div class="srch-wrap">
@@ -265,7 +265,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);font-
     <!-- BUCKET TABLE -->
     <div class="card">
       <div class="card-hdr">
-        <span class="card-title">🪣 Bucket-wise Breakdown</span>
+        <span class="card-title"> Bucket-wise Breakdown</span>
         <span style="font-size:.67rem;color:var(--muted)" id="bucketTotal"></span>
       </div>
       <div class="card-body" style="padding:0;">
@@ -372,7 +372,7 @@ function populateSels(){
   fillSel('fStatus',C.TSM_ST,'All','🏷 All Statuses');
   fillSel('fTsm',C.TSM_PROJ,'All','📋 TSM Projects: All');
   fillSel('fCity',C.CITY,'All','🏙 All Cities');
-  fillSel('fBucket',C.BUCKET,'All','🪣 All Buckets');
+  fillSel('fBucket',C.BUCKET,'All',' All Buckets');
 }
 function fillSel(id,col,allVal,allLbl){
   const s=document.getElementById(id);
@@ -412,7 +412,7 @@ function applyFilters(){
 
 // ─── TAGS ──────────────────────────────────────────────────────────────────
 function renderTags(){
-  const map=[['designer','👤 ','fDesigner'],['status','🏷 ','fStatus'],['tsm','📋 ','fTsm'],['city','🏙 ','fCity'],['bucket','🪣 ','fBucket'],['date','📅 ','fDate']];
+  const map=[['designer','👤 ','fDesigner'],['status','🏷 ','fStatus'],['tsm','📋 ','fTsm'],['city','🏙 ','fCity'],['bucket',' ','fBucket'],['date','📅 ','fDate']];
   const tags=map.filter(([k])=>F[k]!=='All').map(([k,ic,sid])=>{
     const lbl=ic+F[k];
     return `<div class="tag">${esc(lbl)}<span class="tag-rm" onclick="resetF('${k}','${sid}')">✕</span></div>`;
