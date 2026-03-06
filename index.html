@@ -6,22 +6,11 @@
 <title>One Team App — TSM Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --bg:#f0f2f8;--surface:#fff;--border:#e2e6f0;
-  --text:#1a1d2e;--muted:#6b7280;--navy:#1a2b5e;
-  --blue:#2563eb;--radius:10px;
-}
+:root{--bg:#f0f2f8;--surface:#fff;--border:#e2e6f0;--text:#1a1d2e;--muted:#6b7280;--navy:#1a2b5e;--blue:#2563eb;--radius:10px;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;width:100%;}
 body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);font-size:13px;min-height:100vh;overflow-x:hidden;}
-
-/* ── HEADER ── */
-.header{
-  background:linear-gradient(135deg,#1a2b5e 0%,#2d4a9e 65%,#3b5fc0 100%);
-  padding:0 28px;display:flex;align-items:center;justify-content:space-between;
-  height:58px;position:sticky;top:0;z-index:200;
-  box-shadow:0 2px 14px rgba(26,43,94,0.3);
-}
+.header{background:linear-gradient(135deg,#1a2b5e 0%,#2d4a9e 65%,#3b5fc0 100%);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:200;box-shadow:0 2px 14px rgba(26,43,94,0.3);}
 .hdr-left{display:flex;align-items:center;gap:12px;}
 .hdr-logo{width:34px;height:34px;background:rgba(255,255,255,0.13);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;}
 .hdr-title{color:#fff;font-size:.98rem;font-weight:700;}
@@ -31,27 +20,10 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);font-
 .sync-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:6px 14px;border-radius:7px;font-family:'Inter',sans-serif;font-size:.73rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;}
 .sync-btn:hover{background:rgba(255,255,255,.2);}
 .sync-btn.loading{opacity:.5;pointer-events:none;}
-
-/* ── FILTER BAR ── */
-.filter-bar{
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  padding:10px 28px;
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  position:sticky;top:58px;z-index:100;
-  box-shadow:0 1px 4px rgba(0,0,0,.04);
-}
+.filter-bar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:58px;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.04);}
 .fb-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);white-space:nowrap;}
 .fb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
-.filter-select{
-  background:#f8fafc;border:1px solid var(--border);border-radius:7px;
-  padding:6px 28px 6px 10px;font-family:'Inter',sans-serif;font-size:.75rem;
-  color:var(--text);outline:none;cursor:pointer;transition:border-color .15s;
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%236b7280' stroke-width='1.5' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 9px center;
-  min-width:130px;
-}
+.filter-select{background:#f8fafc;border:1px solid var(--border);border-radius:7px;padding:6px 28px 6px 10px;font-family:'Inter',sans-serif;font-size:.75rem;color:var(--text);outline:none;cursor:pointer;transition:border-color .15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%236b7280' stroke-width='1.5' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;min-width:140px;}
 .filter-select:focus{border-color:var(--blue);}
 .filter-select.active{border-color:var(--blue);background-color:#eff6ff;color:var(--blue);font-weight:500;}
 .search-wrap{position:relative;margin-left:auto;}
@@ -61,78 +33,67 @@ body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);font-
 .search-input::placeholder{color:var(--muted);}
 .clear-all-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:7px;font-family:'Inter',sans-serif;font-size:.72rem;cursor:pointer;white-space:nowrap;transition:all .15s;}
 .clear-all-btn:hover{border-color:#ef4444;color:#ef4444;}
-
-/* ── MAIN ── */
-.main{padding:22px 28px;width:100%;}
-
-/* ── KPI ROW ── */
-.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-bottom:20px;}
-.kpi{border-radius:var(--radius);padding:16px 18px;box-shadow:0 1px 4px rgba(0,0,0,.08);position:relative;overflow:hidden;animation:fadeUp .4s ease both;}
+.active-strip{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 28px 0;}
+.a-tag{background:#eff6ff;border:1px solid #bfdbfe;color:var(--blue);border-radius:20px;padding:3px 10px;font-size:.68rem;font-weight:500;display:flex;align-items:center;gap:5px;}
+.a-tag .rm{cursor:pointer;color:#93c5fd;transition:color .15s;}
+.a-tag .rm:hover{color:#1d4ed8;}
+.main{padding:20px 28px;width:100%;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px;}
+.kpi{border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 6px rgba(0,0,0,.09);position:relative;overflow:hidden;animation:fadeUp .4s ease both;}
 .kpi.white{background:#fff;border:1px solid var(--border);}
-.kpi.kblue  {background:linear-gradient(135deg,#1d4ed8,#3b82f6);}
-.kpi.kcyan  {background:linear-gradient(135deg,#0e7490,#22d3ee);}
-.kpi.kgreen {background:linear-gradient(135deg,#047857,#34d399);}
-.kpi.kpink  {background:linear-gradient(135deg,#be185d,#f472b6);}
-.kpi.kpurple{background:linear-gradient(135deg,#5b21b6,#a78bfa);}
-.kpi-lbl{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;opacity:.8;margin-bottom:8px;}
+.kpi.kblue{background:linear-gradient(135deg,#1d4ed8,#3b82f6);}
+.kpi.kcyan{background:linear-gradient(135deg,#0e7490,#22d3ee);}
+.kpi.kred{background:linear-gradient(135deg,#b91c1c,#f87171);}
+.kpi-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.9px;opacity:.85;margin-bottom:10px;}
 .kpi.white .kpi-lbl{color:var(--muted);opacity:1;}
-.kpi-val{font-size:2rem;font-weight:800;line-height:1;letter-spacing:-.5px;color:#fff;margin-bottom:4px;}
+.kpi-val{font-size:2.2rem;font-weight:800;line-height:1;letter-spacing:-.5px;color:#fff;margin-bottom:5px;}
 .kpi.white .kpi-val{color:var(--text);}
 .kpi-sub{font-size:.67rem;opacity:.75;color:#fff;}
 .kpi.white .kpi-sub{color:var(--muted);opacity:1;}
-.kpi-icon{position:absolute;right:14px;top:14px;font-size:1.4rem;opacity:.2;}
-
-/* ── CHARTS ROW ── */
-.charts-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px;margin-bottom:20px;}
+.kpi-icon{position:absolute;right:16px;top:16px;font-size:1.6rem;opacity:.18;}
+.charts-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:14px;margin-bottom:20px;}
 .chart-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.06);animation:fadeUp .5s ease both;}
-.chart-title{font-size:.65rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:700;margin-bottom:16px;}
-
-/* Bar chart */
-.bar-rows{display:flex;flex-direction:column;gap:10px;}
+.chart-title{font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:700;margin-bottom:16px;}
+.bar-rows{display:flex;flex-direction:column;gap:11px;}
 .bar-item{display:flex;align-items:center;gap:9px;}
-.bar-name{font-size:.73rem;color:var(--text);width:110px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bar-name{font-size:.72rem;color:var(--text);width:100px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .bar-track{flex:1;height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;}
 .bar-fill{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.4,0,.2,1);}
-.bar-num{font-size:.7rem;color:var(--muted);width:24px;text-align:right;font-weight:600;}
-
-/* Donut */
+.bar-num{font-size:.7rem;color:var(--muted);width:26px;text-align:right;font-weight:600;}
 .donut-wrap{display:flex;gap:16px;align-items:center;justify-content:center;}
-.donut-legend{display:flex;flex-direction:column;gap:8px;flex:1;}
+.donut-legend{display:flex;flex-direction:column;gap:9px;flex:1;}
 .leg-row{display:flex;align-items:center;gap:8px;}
-.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.leg-name{font-size:.72rem;color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.leg-name{font-size:.72rem;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .leg-val{font-size:.72rem;font-weight:700;color:var(--text);}
-.leg-pct{font-size:.66rem;color:var(--muted);margin-left:2px;}
-
-/* Stacked bar (designer breakdown) */
+.leg-pct{font-size:.65rem;color:var(--muted);}
 .stacked-rows{display:flex;flex-direction:column;gap:9px;}
 .stacked-item{display:flex;flex-direction:column;gap:3px;}
 .stacked-name{font-size:.71rem;color:var(--text);display:flex;justify-content:space-between;}
 .stacked-name span{color:var(--muted);}
 .stacked-track{width:100%;height:7px;background:#f1f5f9;border-radius:4px;overflow:hidden;}
 .stacked-fill{height:100%;border-radius:4px;transition:width 1s ease;}
-
-/* ── TABLE ── */
 .table-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);animation:fadeUp .55s ease both;}
 .table-top{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .t-title{font-size:.78rem;font-weight:700;}
 .t-count{font-size:.68rem;color:var(--muted);background:var(--bg);padding:2px 9px;border-radius:20px;}
-table{width:100%;border-collapse:collapse;}
-thead{background:#f8fafc;}
-th{padding:9px 13px;text-align:left;font-size:.64rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;cursor:pointer;white-space:nowrap;border-bottom:2px solid var(--border);user-select:none;transition:color .15s;}
+.table-scroll{overflow:auto;max-height:420px;}
+.table-scroll::-webkit-scrollbar{width:6px;height:6px;}
+.table-scroll::-webkit-scrollbar-track{background:#f1f5f9;}
+.table-scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
+.table-scroll::-webkit-scrollbar-thumb:hover{background:#94a3b8;}
+table{width:100%;border-collapse:collapse;min-width:900px;}
+thead{background:#f8fafc;position:sticky;top:0;z-index:10;}
+th{padding:9px 13px;text-align:left;font-size:.63rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;cursor:pointer;white-space:nowrap;border-bottom:2px solid var(--border);user-select:none;transition:color .15s;background:#f8fafc;}
 th:hover{color:var(--blue);}
-td{padding:9px 13px;font-size:.77rem;border-bottom:1px solid #f1f5f9;color:var(--text);white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis;}
+td{padding:9px 13px;font-size:.77rem;border-bottom:1px solid #f1f5f9;color:var(--text);white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:#f8faff;}
-
-/* BADGES */
 .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.66rem;font-weight:600;}
 .b-completed{background:#d1fae5;color:#065f46;}
-.b-pending  {background:#fef3c7;color:#92400e;}
-.b-delayed  {background:#fee2e2;color:#991b1b;}
-.b-progress {background:#dbeafe;color:#1e40af;}
-
-/* PAGINATION */
+.b-pending{background:#fef3c7;color:#92400e;}
+.b-delayed{background:#fee2e2;color:#991b1b;}
+.b-progress{background:#dbeafe;color:#1e40af;}
 .table-foot{padding:10px 18px;background:#f8fafc;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .pg-info{font-size:.69rem;color:var(--muted);}
 .pg-wrap{display:flex;align-items:center;gap:5px;}
@@ -141,22 +102,13 @@ tbody tr:hover td{background:#f8faff;}
 .pg-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
 .pg-nav{background:#fff;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:5px;cursor:pointer;font-size:.73rem;transition:all .15s;}
 .pg-nav:hover{border-color:var(--blue);color:var(--blue);}
-
-/* LOADER / ERROR */
 .loader{text-align:center;padding:50px 20px;color:var(--muted);font-size:.82rem;}
 .spin{display:inline-block;width:26px;height:26px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:10px;}
 .error-box{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:18px;color:#991b1b;font-size:.78rem;line-height:2;margin:18px;}
-
-/* ACTIVE TAG STRIP */
-.active-strip{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 28px 10px;}
-.a-tag{background:#eff6ff;border:1px solid #bfdbfe;color:var(--blue);border-radius:20px;padding:3px 10px;font-size:.68rem;font-weight:500;display:flex;align-items:center;gap:5px;}
-.a-tag .rm{cursor:pointer;color:#93c5fd;transition:color .15s;}
-.a-tag .rm:hover{color:#1d4ed8;}
-
 @keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
-@media(max-width:1100px){.kpi-row{grid-template-columns:repeat(3,1fr);}.charts-row{grid-template-columns:1fr 1fr;}}
-@media(max-width:700px){.kpi-row{grid-template-columns:repeat(2,1fr);}.charts-row{grid-template-columns:1fr;}}
+@media(max-width:1100px){.kpi-row{grid-template-columns:repeat(2,1fr);}.charts-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}.charts-row{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -183,32 +135,22 @@ tbody tr:hover td{background:#f8faff;}
 <div class="filter-bar">
   <span class="fb-label">Filters</span>
   <div class="fb-sep"></div>
-
-  <!-- Date -->
   <select class="filter-select" id="sel-date" onchange="onF('date',this)">
     <option value="All time">📅 All time</option>
     <option value="Last 7 days">Last 7 days</option>
     <option value="Last 30 days">Last 30 days</option>
     <option value="This month">This month</option>
   </select>
-
-  <!-- Designer -->
   <select class="filter-select" id="sel-city" onchange="onF('city',this)">
     <option value="All">👤 All Designers</option>
   </select>
-
-  <!-- TSM Verif Status -->
   <select class="filter-select" id="sel-status" onchange="onF('status',this)">
     <option value="All">🏷 All Statuses</option>
   </select>
-
-  <!-- TSM Projects Yes/No -->
   <select class="filter-select" id="sel-timeline" onchange="onF('timeline',this)">
     <option value="All">📋 TSM Projects: All</option>
   </select>
-
   <button class="clear-all-btn" onclick="clearAll()">✕ Clear</button>
-
   <div class="search-wrap">
     <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input class="search-input" id="searchInput" placeholder="Search project…" oninput="applyFilters()"/>
@@ -221,11 +163,11 @@ tbody tr:hover td{background:#f8faff;}
 <!-- MAIN -->
 <div class="main">
 
-  <!-- KPI CARDS -->
+  <!-- KPI ROW — 4 cards -->
   <div class="kpi-row">
     <div class="kpi white">
       <div class="kpi-icon">📋</div>
-      <div class="kpi-lbl">TSM Projects</div>
+      <div class="kpi-lbl">TSM Assign Projects</div>
       <div class="kpi-val" id="kA">—</div>
       <div class="kpi-sub" id="kAS">BL = Yes</div>
     </div>
@@ -239,56 +181,33 @@ tbody tr:hover td{background:#f8faff;}
       <div class="kpi-icon">⏳</div>
       <div class="kpi-lbl">Pending</div>
       <div class="kpi-val" id="kP">—</div>
-      <div class="kpi-sub" id="kPS">Distinct leads − Approved</div>
+      <div class="kpi-sub" id="kPS">TSM Assign − Approved</div>
     </div>
-    <div class="kpi kgreen">
-      <div class="kpi-icon">🔗</div>
-      <div class="kpi-lbl">Distinct Leads</div>
-      <div class="kpi-val" id="kD">—</div>
-      <div class="kpi-sub" id="kDS">Unique lead IDs</div>
-    </div>
-    <div class="kpi kpink">
-      <div class="kpi-icon">⚡</div>
-      <div class="kpi-lbl">In Progress</div>
+    <div class="kpi kred">
+      <div class="kpi-icon">❌</div>
+      <div class="kpi-lbl">TSM Reject</div>
       <div class="kpi-val" id="kI">—</div>
-      <div class="kpi-sub" id="kIS">Verification ongoing</div>
-    </div>
-    <div class="kpi kpurple">
-      <div class="kpi-icon">📊</div>
-      <div class="kpi-lbl">Total Rows</div>
-      <div class="kpi-val" id="kT">—</div>
-      <div class="kpi-sub" id="kTS">All filtered entries</div>
+      <div class="kpi-sub" id="kIS">AQ = Rejected</div>
     </div>
   </div>
 
   <!-- CHARTS ROW -->
   <div class="charts-row">
-
-    <!-- Chart 1: TSM Verification Status breakdown (bar) -->
     <div class="chart-card">
       <div class="chart-title">TSM Verification Status</div>
-      <div class="bar-rows" id="statusChart">
-        <div class="loader" style="padding:20px"><div class="spin"></div></div>
-      </div>
+      <div class="bar-rows" id="statusChart"><div class="loader" style="padding:20px 0"><div class="spin"></div></div></div>
     </div>
-
-    <!-- Chart 2: TSM Complete vs Pending (donut) -->
     <div class="chart-card">
-      <div class="chart-title">Complete vs Pending</div>
+      <div class="chart-title">Complete vs Pending vs Rejected</div>
       <div class="donut-wrap">
         <svg id="donutSvg" width="120" height="120" viewBox="0 0 100 100"></svg>
         <div class="donut-legend" id="donutLegend"></div>
       </div>
     </div>
-
-    <!-- Chart 3: Projects per Designer (bar) -->
     <div class="chart-card">
       <div class="chart-title">Projects by Designer</div>
-      <div class="stacked-rows" id="designerChart">
-        <div class="loader" style="padding:20px"><div class="spin"></div></div>
-      </div>
+      <div class="stacked-rows" id="designerChart"><div class="loader" style="padding:20px 0"><div class="spin"></div></div></div>
     </div>
-
   </div>
 
   <!-- TABLE -->
@@ -299,7 +218,7 @@ tbody tr:hover td{background:#f8faff;}
         <span class="t-count" id="rowCount">—</span>
       </div>
     </div>
-    <div id="tableArea">
+    <div class="table-scroll" id="tableArea">
       <div class="loader"><div class="spin"></div><br>Connecting to Google Sheets…</div>
     </div>
     <div class="table-foot" id="tableFoot" style="display:none">
@@ -315,32 +234,37 @@ tbody tr:hover td{background:#f8faff;}
 </div><!-- /main -->
 
 <script>
-// ── CONFIG ─────────────────────────────────────────────────────────────────
 const SHEET_ID='1Rl3UagUWe9W7atfmQyU383mZC4Ly7C0gk7mv_Mc0JFw', GID='0';
-const CSV_URL=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${GID}`;
+const RAW_URL=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${GID}`;
+const CSV_URL=`https://api.allorigins.win/get?url=${encodeURIComponent(RAW_URL)}`;
 const PG=15;
-const COL_LEAD=0, COL_PROJECT=1, COL_DESIGNER=3, COL_3D_APPROVED=9,
-      COL_QHSE=23, COL_TSM_LAYOUT=27, COL_TSM_APPROVED=33,
-      COL_TSM_STATUS=42, COL_FINANCE=48, COL_TSM_PROJ=63;
+const COL_LEAD=0,COL_PROJECT=1,COL_DESIGNER=3,COL_3D_APPROVED=9,
+      COL_QHSE=23,COL_TSM_APPROVED=33,COL_TSM_STATUS=42,COL_FINANCE=48,COL_TSM_PROJ=63;
 
-// ── STATE ──────────────────────────────────────────────────────────────────
 let allRows=[],headers=[],filtered=[];
 let F={date:'All time',city:'All',status:'All',timeline:'All'};
 let pg=1,sc=-1,sd=1;
 
-// ── LOAD ───────────────────────────────────────────────────────────────────
 async function loadData(){
   const btn=document.getElementById('syncBtn');
   btn.classList.add('loading');
-  try{
-    const r=await fetch(CSV_URL);
-    if(!r.ok) throw new Error(`HTTP ${r.status}`);
-    parseCSV(await r.text());
-    const t=new Date().toLocaleTimeString();
-    document.getElementById('syncTime').textContent='Synced '+t;
-  }catch(e){
-    document.getElementById('tableArea').innerHTML=`<div class="error-box"><strong>⚠ Cannot load Google Sheet</strong><br><br>Share: <strong>Share → Anyone with the link → Viewer</strong> then click Sync Sheet.<br><small>Error: ${e.message}</small></div>`;
-  }finally{ btn.classList.remove('loading'); }
+  // Try 3 methods in order
+  const urls=[
+    {url:CSV_URL, parse: async r=>{ const j=await r.json(); return j.contents; }},
+    {url:RAW_URL, parse: async r=>r.text()},
+    {url:`https://corsproxy.io/?${encodeURIComponent(RAW_URL)}`, parse: async r=>r.text()},
+  ];
+  let lastErr='';
+  for(const {url,parse} of urls){
+    try{
+      const r=await fetch(url);
+      if(!r.ok) throw new Error(`HTTP ${r.status}`);
+      const text=await parse(r);
+      if(text&&text.length>10){ parseCSV(text); document.getElementById('syncTime').textContent='Synced '+new Date().toLocaleTimeString(); btn.classList.remove('loading'); return; }
+    }catch(e){ lastErr=e.message; }
+  }
+  btn.classList.remove('loading');
+  document.getElementById('tableArea').innerHTML=`<div class="error-box"><strong>⚠ Cannot load Google Sheet</strong><br><br>1. Open your sheet → Share → Anyone with the link → <strong>Viewer</strong><br>2. Click Sync Sheet again.<br><small>Last error: ${lastErr}</small></div>`;
 }
 
 function parseCSV(text){
@@ -357,11 +281,10 @@ function pl(line){
   return res;
 }
 
-// ── SELECTS ────────────────────────────────────────────────────────────────
 function populateSelects(){
-  fillSel('sel-city',   COL_DESIGNER,   'All','👤 All Designers');
-  fillSel('sel-status', COL_TSM_STATUS, 'All','🏷 All Statuses');
-  fillSel('sel-timeline',COL_TSM_PROJ,  'All','📋 TSM Projects: All');
+  fillSel('sel-city',COL_DESIGNER,'All','👤 All Designers');
+  fillSel('sel-status',COL_TSM_STATUS,'All','🏷 All Statuses');
+  fillSel('sel-timeline',COL_TSM_PROJ,'All','📋 TSM Projects: All');
 }
 function fillSel(id,colI,allVal,allLabel){
   const s=document.getElementById(id);
@@ -376,14 +299,11 @@ function onF(key,sel){
 }
 function clearAll(){
   F={date:'All time',city:'All',status:'All',timeline:'All'};
-  ['sel-date','sel-city','sel-status','sel-timeline'].forEach(id=>{
-    const s=document.getElementById(id); s.selectedIndex=0; s.classList.remove('active');
-  });
+  ['sel-date','sel-city','sel-status','sel-timeline'].forEach(id=>{const s=document.getElementById(id);s.selectedIndex=0;s.classList.remove('active');});
   document.getElementById('searchInput').value='';
   pg=1; applyFilters();
 }
 
-// ── FILTER ─────────────────────────────────────────────────────────────────
 function applyFilters(){
   const q=document.getElementById('searchInput').value.toLowerCase();
   filtered=allRows.filter(r=>{
@@ -397,60 +317,43 @@ function applyFilters(){
   updateKPIs(); renderCharts(); renderTags(); renderTable();
 }
 
-// ── ACTIVE TAGS ────────────────────────────────────────────────────────────
 function renderTags(){
   const tags=[];
-  if(F.city!=='All') tags.push({l:'Designer: '+F.city,c:()=>{F.city='All';resetSel('sel-city','All');applyFilters();}});
-  if(F.status!=='All') tags.push({l:'Status: '+F.status,c:()=>{F.status='All';resetSel('sel-status','All');applyFilters();}});
+  if(F.city!=='All')     tags.push({l:'Designer: '+F.city,c:()=>{F.city='All';resetSel('sel-city','All');applyFilters();}});
+  if(F.status!=='All')   tags.push({l:'Status: '+F.status,c:()=>{F.status='All';resetSel('sel-status','All');applyFilters();}});
   if(F.timeline!=='All') tags.push({l:'TSM: '+F.timeline,c:()=>{F.timeline='All';resetSel('sel-timeline','All');applyFilters();}});
-  if(F.date!=='All time') tags.push({l:'Date: '+F.date,c:()=>{F.date='All time';resetSel('sel-date','All time');applyFilters();}});
+  if(F.date!=='All time')tags.push({l:'Date: '+F.date,c:()=>{F.date='All time';resetSel('sel-date','All time');applyFilters();}});
   window._tc=tags.map(t=>t.c);
-  document.getElementById('activeTags').innerHTML=tags.map((t,i)=>
-    `<div class="a-tag">${esc(t.l)}<span class="rm" onclick="_tc[${i}]()">✕</span></div>`
-  ).join('');
+  document.getElementById('activeTags').innerHTML=tags.map((t,i)=>`<div class="a-tag">${esc(t.l)}<span class="rm" onclick="_tc[${i}]()">✕</span></div>`).join('');
 }
-function resetSel(id,val){
-  const s=document.getElementById(id);
-  s.value=val; s.classList.remove('active');
-}
+function resetSel(id,val){const s=document.getElementById(id);s.value=val;s.classList.remove('active');}
 
-// ── KPIs ───────────────────────────────────────────────────────────────────
 function updateKPIs(){
-  const tsmYes=allRows.filter(r=>(r[COL_TSM_PROJ]||'').trim().toLowerCase()==='yes').length;
+  const tsmAssign=allRows.filter(r=>(r[COL_TSM_PROJ]||'').trim().toLowerCase()==='yes').length;
   const approved=filtered.filter(r=>/approv/i.test(r[COL_TSM_STATUS]||'')).length;
-  const distinctLeads=new Set(filtered.map(r=>(r[COL_LEAD]||'').trim()).filter(Boolean)).size;
-  const pending=Math.max(0,distinctLeads-approved);
-  const inProgress=filtered.filter(r=>{const v=(r[COL_TSM_STATUS]||'').trim();return v&&!/approv/i.test(v);}).length;
+  const rejected=filtered.filter(r=>/reject/i.test(r[COL_TSM_STATUS]||'')).length;
+  const pending=Math.max(0,tsmAssign-approved);
   const tot=filtered.length;
   const pct=(n)=>tot>0?' · '+Math.round(n/tot*100)+'%':'';
-
-  set('kA',tsmYes,'BL = Yes (all data)');
-  set('kC',approved,'AQ = Approved'+pct(approved));
-  set('kP',pending,'Distinct leads − Approved');
-  set('kD',distinctLeads,'Unique lead IDs');
-  set('kI',inProgress,'Verification ongoing'+pct(inProgress));
-  set('kT',tot,'All filtered entries');
-}
-function set(id,val,sub){
-  document.getElementById(id).textContent=val;
-  const s=document.getElementById(id+'S'); if(s) s.textContent=sub;
+  document.getElementById('kA').textContent=tsmAssign;
+  document.getElementById('kAS').textContent='BL = Yes (all data)';
+  document.getElementById('kC').textContent=approved;
+  document.getElementById('kCS').textContent='AQ = Approved'+pct(approved);
+  document.getElementById('kP').textContent=pending;
+  document.getElementById('kPS').textContent='TSM Assign − Approved';
+  document.getElementById('kI').textContent=rejected;
+  document.getElementById('kIS').textContent='AQ = Rejected'+pct(rejected);
 }
 
-// ── CHARTS ─────────────────────────────────────────────────────────────────
-const PAL=['#2563eb','#0891b2','#059669','#be185d','#7c3aed','#ea580c','#0d9488','#b45309'];
-
-function renderCharts(){
-  renderStatusBar();
-  renderDonut();
-  renderDesignerBar();
-}
+const PAL=['#2563eb','#059669','#0891b2','#be185d','#7c3aed','#ea580c','#0d9488','#b45309'];
+function renderCharts(){renderStatusBar();renderDonut();renderDesignerBar();}
 
 function renderStatusBar(){
   const el=document.getElementById('statusChart');
   const counts={};
   filtered.forEach(r=>{const v=(r[COL_TSM_STATUS]||'').trim()||'(blank)';counts[v]=(counts[v]||0)+1;});
   const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,7);
-  if(!sorted.length){el.innerHTML='<span style="color:var(--muted);font-size:.75rem">No data</span>';return;}
+  if(!sorted.length){el.innerHTML='<span style="color:var(--muted);font-size:.75rem">No data yet</span>';return;}
   const max=sorted[0][1];
   el.innerHTML=sorted.map(([name,count],i)=>`
     <div class="bar-item">
@@ -461,46 +364,32 @@ function renderStatusBar(){
 }
 
 function renderDonut(){
-  const svg=document.getElementById('donutSvg'), leg=document.getElementById('donutLegend');
+  const svg=document.getElementById('donutSvg'),leg=document.getElementById('donutLegend');
   const approved=filtered.filter(r=>/approv/i.test(r[COL_TSM_STATUS]||'')).length;
-  const distinctLeads=new Set(filtered.map(r=>(r[COL_LEAD]||'').trim()).filter(Boolean)).size;
-  const pending=Math.max(0,distinctLeads-approved);
-  const inProg=filtered.filter(r=>{const v=(r[COL_TSM_STATUS]||'').trim();return v&&!/approv/i.test(v);}).length;
-  const total=approved+pending+inProg||1;
-  const segments=[
-    {label:'Complete', val:approved, color:'#059669'},
-    {label:'Pending',  val:pending,  color:'#f59e0b'},
-    {label:'In Progress',val:inProg, color:'#2563eb'},
-  ].filter(s=>s.val>0);
-  let angle=-90, paths='';
+  const rejected=filtered.filter(r=>/reject/i.test(r[COL_TSM_STATUS]||'')).length;
+  const tsmAssign=allRows.filter(r=>(r[COL_TSM_PROJ]||'').trim().toLowerCase()==='yes').length;
+  const pending=Math.max(0,tsmAssign-approved);
+  const total=approved+pending+rejected||1;
+  const segs=[{label:'Complete',val:approved,color:'#059669'},{label:'Pending',val:pending,color:'#f59e0b'},{label:'Rejected',val:rejected,color:'#ef4444'}].filter(s=>s.val>0);
+  let angle=-90,paths='';
   const cx=50,cy=50,r=38,ir=22;
-  segments.forEach(s=>{
-    const deg=s.val/total*360, a1=angle*Math.PI/180, a2=(angle+deg)*Math.PI/180, lf=deg>180?1:0;
+  segs.forEach(s=>{
+    const deg=s.val/total*360,a1=angle*Math.PI/180,a2=(angle+deg)*Math.PI/180,lf=deg>180?1:0;
     const x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
     const xi1=cx+ir*Math.cos(a1),yi1=cy+ir*Math.sin(a1),xi2=cx+ir*Math.cos(a2),yi2=cy+ir*Math.sin(a2);
     paths+=`<path d="M${xi1},${yi1}L${x1},${y1}A${r},${r} 0 ${lf},1 ${x2},${y2}L${xi2},${yi2}A${ir},${ir} 0 ${lf},0 ${xi1},${yi1}Z" fill="${s.color}"/>`;
     angle+=deg;
   });
-  const tot2=filtered.length;
-  svg.innerHTML=paths+`<text x="50" y="47" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="800" fill="#1a1d2e">${tot2}</text><text x="50" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#6b7280">TOTAL</text>`;
-  leg.innerHTML=segments.map(s=>`
-    <div class="leg-row">
-      <div class="leg-dot" style="background:${s.color}"></div>
-      <span class="leg-name">${esc(s.label)}</span>
-      <span class="leg-val">${s.val}</span>
-      <span class="leg-pct">(${Math.round(s.val/total*100)}%)</span>
-    </div>`).join('');
+  svg.innerHTML=paths+`<text x="50" y="47" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="800" fill="#1a1d2e">${filtered.length}</text><text x="50" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="7" fill="#6b7280">TOTAL</text>`;
+  leg.innerHTML=segs.map(s=>`<div class="leg-row"><div class="leg-dot" style="background:${s.color}"></div><span class="leg-name">${esc(s.label)}</span><span class="leg-val">${s.val}</span><span class="leg-pct">(${Math.round(s.val/total*100)}%)</span></div>`).join('');
 }
 
 function renderDesignerBar(){
   const el=document.getElementById('designerChart');
   const counts={};
-  filtered.forEach(r=>{
-    const v=(r[COL_DESIGNER]||'').trim();
-    if(v) counts[v]=(counts[v]||0)+1;
-  });
+  filtered.forEach(r=>{const v=(r[COL_DESIGNER]||'').trim();if(v)counts[v]=(counts[v]||0)+1;});
   const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  if(!sorted.length){el.innerHTML='<span style="color:var(--muted);font-size:.75rem">No data</span>';return;}
+  if(!sorted.length){el.innerHTML='<span style="color:var(--muted);font-size:.75rem">No data yet</span>';return;}
   const max=sorted[0][1];
   el.innerHTML=sorted.map(([name,count],i)=>`
     <div class="stacked-item">
@@ -509,33 +398,26 @@ function renderDesignerBar(){
     </div>`).join('');
 }
 
-// ── TABLE ──────────────────────────────────────────────────────────────────
 function renderTable(){
-  const tot=filtered.length, pages=Math.max(1,Math.ceil(tot/PG));
+  const tot=filtered.length,pages=Math.max(1,Math.ceil(tot/PG));
   if(pg>pages) pg=pages;
-  const s=(pg-1)*PG, e=Math.min(s+PG,tot), rows=filtered.slice(s,e);
+  const s=(pg-1)*PG,e=Math.min(s+PG,tot),rows=filtered.slice(s,e);
   const dc=[
-    {l:'Lead ID',         i:COL_LEAD},
-    {l:'Project Name',    i:COL_PROJECT},
-    {l:'Designer',        i:COL_DESIGNER},
-    {l:'3D Approved On',  i:COL_3D_APPROVED},
-    {l:'QHSE Status',     i:COL_QHSE},
-    {l:'TSM Approved On', i:COL_TSM_APPROVED},
-    {l:'TSM Verif Status',i:COL_TSM_STATUS},
-    {l:'Finance',         i:COL_FINANCE},
-    {l:'TSM Project',     i:COL_TSM_PROJ},
+    {l:'Lead ID',i:COL_LEAD},{l:'Project Name',i:COL_PROJECT},{l:'Designer',i:COL_DESIGNER},
+    {l:'3D Approved On',i:COL_3D_APPROVED},{l:'QHSE Status',i:COL_QHSE},
+    {l:'TSM Approved On',i:COL_TSM_APPROVED},{l:'TSM Verif. Status',i:COL_TSM_STATUS},
+    {l:'Finance',i:COL_FINANCE},{l:'TSM Project',i:COL_TSM_PROJ}
   ].filter(c=>c.i<(headers.length||999));
-
   document.getElementById('rowCount').textContent=`${tot} rows`;
   let html=`<table><thead><tr>`;
   dc.forEach(c=>{const a=sc===c.i?(sd===1?' ↑':' ↓'):'';html+=`<th onclick="sortBy(${c.i})">${esc(c.l)}${a}</th>`;});
   html+=`</tr></thead><tbody>`;
-  if(!rows.length){html+=`<tr><td colspan="${dc.length}" style="text-align:center;padding:40px;color:var(--muted)">No results match the selected filters</td></tr>`;}
+  if(!rows.length){html+=`<tr><td colspan="${dc.length}" style="text-align:center;padding:40px;color:var(--muted)">No results match filters</td></tr>`;}
   else{
     rows.forEach(row=>{
       html+='<tr>';
       dc.forEach(c=>{
-        const val=(row[c.i]||'').trim(), l=c.l.toLowerCase();
+        const val=(row[c.i]||'').trim(),l=c.l.toLowerCase();
         let cell;
         if(l.includes('status')||l.includes('verif')) cell=bSt(val);
         else if(l.includes('tsm project')||l.includes('finance')) cell=bYN(val);
@@ -549,9 +431,9 @@ function renderTable(){
   }
   html+='</tbody></table>';
   document.getElementById('tableArea').innerHTML=html;
-  const foot=document.getElementById('tableFoot'); foot.style.display='flex';
+  const foot=document.getElementById('tableFoot');foot.style.display='flex';
   document.getElementById('pgInfo').textContent=`${s+1}–${e} of ${tot} entries`;
-  const pb=document.getElementById('pgBtns'); pb.innerHTML='';
+  const pb=document.getElementById('pgBtns');pb.innerHTML='';
   for(let p=1;p<=Math.min(pages,8);p++){
     const b=document.createElement('button');
     b.className='pg-btn'+(p===pg?' active':'');b.textContent=p;
@@ -559,7 +441,7 @@ function renderTable(){
   }
 }
 function sortBy(i){if(sc===i)sd*=-1;else{sc=i;sd=1;}renderTable();}
-function pgNav(d){const pages=Math.max(1,Math.ceil(filtered.length/PG));pg=Math.min(Math.max(1,pg+d),pages);renderTable();}
+function pgNav(d){const pages=Math.max(1,Math.ceil(filtered.length/PG));pg=Math.min(Math.max(1,pg+d),pages);renderTable();document.getElementById('tableArea').scrollTop=0;}
 function bSt(v){if(!v)return '<span style="color:#cbd5e1">—</span>';let c='b-pending';if(/approv/i.test(v))c='b-completed';else if(/reject/i.test(v))c='b-delayed';else if(/progress/i.test(v))c='b-progress';return`<span class="badge ${c}">${esc(v)}</span>`;}
 function bYN(v){if(!v)return '<span style="color:#cbd5e1">—</span>';let c='b-pending';if(/yes|approv/i.test(v))c='b-completed';else if(/no|reject/i.test(v))c='b-delayed';return`<span class="badge ${c}">${esc(v)}</span>`;}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
